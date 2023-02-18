@@ -1,0 +1,60 @@
+captainVersion: 4
+services:
+    # Readarr
+    $$cap_appname:
+        image: linuxserver/readarr:$$cap_readarr_version
+        environment:
+            TZ: $$cap_tz
+            PUID: $$cap_puid
+            PGID: $$cap_guid
+        volumes:
+            - $$cap_appname-config:/config
+            - $$cap_path_to_books:/books
+            - $$cap_path_to_downloads:/downloads
+        caproverExtra:
+            containerHttpPort: 8787
+caproverOneClickApp:
+    variables:
+        - id: $$cap_readarr_version
+          label: Readarr Version
+          defaultValue: 0.1.3-develop
+          description: Check out their Docker page for the valid tags https://hub.docker.com/r/linuxserver/readarr/tags
+          validRegex: /^([^\s^\/])+$/
+
+        - id: $$cap_tz
+          label: Time Zone
+          defaultValue: Asia/Dhaka
+          description: Get yours from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+          validRegex: /.{1,}/
+
+        - id: $$cap_path_to_downloads
+          label: Location of download managers output directory
+          description: Location of download managers output directory
+          validRegex: /\/[^\s-][a-zA-Z0-9_\/-]*[^\/][^\s-]/
+
+        - id: $$cap_path_to_books
+          label: Location of Books library on disk
+          description: Location of Books library on disk
+          validRegex: /\/[^\s-][a-zA-Z0-9_\/-]*[^\/][^\s-]/
+
+        - id: $$cap_puid
+          label: User ID
+          defaultValue: '1000'
+          description: User ID that the process uses, run (id $user) in your instance to see the id
+          validRegex: /.{1,}/
+
+        - id: $$cap_guid
+          label: Group ID
+          defaultValue: '1000'
+          description: Group ID that the process uses, run (id $user) in your instance to see the id
+          validRegex: /.{1,}/
+    instructions:
+        start: >-
+            Readarr is a Usenet and/or torrent book downloader based on Sonarr. It can monitor multiple RSS feeds for new books and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing books in the library when a better quality format becomes available.
+        end: >-
+            Aaaand you're done! 😄
+            Readarr is available at http://$$cap_appname.$$cap_root_domain
+    displayName: Readarr
+    isOfficial: false
+    description: Readarr is a Usenet and/or torrent book downloader based on Sonarr. It can monitor multiple RSS feeds for new books and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing books in the library when a better quality format becomes available.
+    documentation: Taken from https://hub.docker.com/r/linuxserver/readarr.
