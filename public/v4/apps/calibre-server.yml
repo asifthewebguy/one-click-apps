@@ -1,0 +1,80 @@
+# copping from the following docker-compose.yml
+# version: "2.1"
+# services:
+#   calibre:
+#     image: lscr.io/linuxserver/calibre:latest
+#     container_name: calibre
+#     security_opt:
+#       - seccomp:unconfined #optional
+#     environment:
+#       - PUID=1000
+#       - PGID=1000
+#       - TZ=Etc/UTC
+#       - PASSWORD= #optional
+#       - CLI_ARGS= #optional
+#     volumes:
+#       - /path/to/data:/config
+#     ports:
+#       - 8080:8080
+#       - 8081:8081
+#     restart: unless-stopped
+
+# captainVersion: 4
+# services:
+#     # Calibre-Server
+#     $$cap_appname:
+#         image: linuxserver/calibre:$$cap_calibre_version
+#         environment:
+#             TZ: $$cap_tz
+#             PUID: $$cap_puid
+#             PGID: $$cap_guid
+#             PASSWORD: $$cap_password
+#             CLI_ARGS: $$cap_cli_args
+#         volumes:
+#             - $$cap_appname-config:/config
+#         ports:
+#             - $$cap_port:8080
+#             - $$cap_port:8081
+#         caproverExtra:
+#             containerHttpPort: 8083
+# caproverOneClickApp:
+#     variables:
+#         - id: $$cap_calibre_version
+#           label: Calibre Version
+#           defaultValue: 0.6.12
+#           description: Check out their Docker page for the valid tags https://hub.docker.com/r/linuxserver/calibre-web/tags
+#           validRegex: /^([^\s^\/])+$/
+
+#         - id: $$cap_tz
+#           label: Time Zone
+#           defaultValue: Asia/Dhaka
+#           description: Get yours from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#           validRegex: /.{1,}/
+
+#         - id: $$cap_path_to_books
+#           label: Location of Books library on disk
+#           description: Location of Books library on disk
+#           validRegex: /\/[^\s-][a-zA-Z0-9_\/-]*[^\/][^\s-]/
+
+#         - id: $$cap_puid
+#           label: User ID
+#           defaultValue: '1000'
+#           description: User ID that the process uses, run (id $user) in your instance to see the id
+#           validRegex: /.{1,}/
+
+#         - id: $$cap_guid
+#           label: Group ID
+#           defaultValue: '1000'
+#           description: Group ID that the process uses, run (id $user) in your instance to see the id
+#           validRegex: /.{1,}/
+
+#     instructions:
+#         start: >-
+#             Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database.
+#         end: >-
+#             Aaaand you're done! 😄
+#             Calibre-Web is available at http://$$cap_appname.$$cap_root_domain
+#     displayName: Calibre-Web
+#     isOfficial: false
+#     description: Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database.
+#     documentation: Taken from https://hub.docker.com/r/linuxserver/calibre-web.
